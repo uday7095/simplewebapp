@@ -1,7 +1,7 @@
-# This workflow will build a Java project with Ant
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-ant
+# This workflow will build a Java project with Maven
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
 
-name: Java CI
+name: Java CI with Maven
 
 on:
   push:
@@ -16,13 +16,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
       with:
-        java-version: '11'
-        distribution: 'adopt'
+        java-version: 1.8
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - run: mkdir deployment && cp target/*.war deployment
-    - run: pwd && ls && target/* && ls deployment/*
-    - run: curl --upload-file deployment/simplewebapp.war "http://deployer:deployer@http://34.207.192.227:8080//manager/text/deploy?path=/githubaction&update=true
+    - run: pwd && ls && ls target/* && ls deployment/*
+    - run: curl --upload-file deployment/simplewebapp.war "http://deployer:deployer@34.207.192.227:8080/manager/text/deploy?path=/githubaction&update=true"
