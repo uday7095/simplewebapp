@@ -4,8 +4,7 @@ node {
   
   stage('Code Checkout') { 
       // Get some code from a GitHub repository
-      git 'https://github.com/rchidana/simplewebapp.git'
-
+      git 'https://github.com/uday7095/simplewebapp.git'
    }
    
    stage('Unit Test') { 
